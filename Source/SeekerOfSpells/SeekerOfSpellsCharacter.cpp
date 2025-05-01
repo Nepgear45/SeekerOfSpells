@@ -18,9 +18,6 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 ASeekerOfSpellsCharacter::ASeekerOfSpellsCharacter()
 {
-	// Character doesnt have a rifle at start
-	bHasRifle = false;
-	
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(55.f, 96.0f);
 		
@@ -39,6 +36,19 @@ ASeekerOfSpellsCharacter::ASeekerOfSpellsCharacter()
 	//Mesh1P->SetRelativeRotation(FRotator(0.9f, -19.19f, 5.2f));
 	Mesh1P->SetRelativeLocation(FVector(-30.f, 0.f, -150.f));
 
+	InventoryList.Init("Empty", 5);
+	InventoryListIndex = 0;
+	InventoryList[0] = "FireBall";
+	InventoryList[1] = "FireBall";
+	InventoryList[2] = "FireBall";
+	InventoryList[3] = "FireBall";
+	InventoryList[4] = "FireBall";
+
+	AllItemsList.Add("BasicAttackSpell");
+	AllItemsList.Add("DispellMagic");
+	AllItemsList.Add("StoneCannon");
+	AllItemsList.Add("FireBall");
+	AllItemsList.Add("Barrier");
 }
 
 void ASeekerOfSpellsCharacter::BeginPlay()
@@ -55,6 +65,11 @@ void ASeekerOfSpellsCharacter::BeginPlay()
 		}
 	}
 
+	if (true) //Needs to be edited for saving
+	{
+		MaxInventory = 4; //Counting 0
+
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////// Input
@@ -73,6 +88,10 @@ void ASeekerOfSpellsCharacter::SetupPlayerInputComponent(UInputComponent* Player
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ASeekerOfSpellsCharacter::Look);
+
+		// Inventory
+		EnhancedInputComponent->BindAction(SwitchSpellForwardAction, ETriggerEvent::Triggered, this, &ASeekerOfSpellsCharacter::CycleInventoryForward);
+		EnhancedInputComponent->BindAction(SwitchSpellBackwardAction, ETriggerEvent::Triggered, this, &ASeekerOfSpellsCharacter::CycleInventoryBackwards);
 	}
 	else
 	{
@@ -107,12 +126,68 @@ void ASeekerOfSpellsCharacter::Look(const FInputActionValue& Value)
 	}
 }
 
-void ASeekerOfSpellsCharacter::SetHasRifle(bool bNewHasRifle)
+void ASeekerOfSpellsCharacter::CycleInventoryForward()
 {
-	bHasRifle = bNewHasRifle;
+	if (Controller != nullptr)
+	{
+		if (InventoryListIndex < MaxInventory) InventoryListIndex++;
+		else InventoryListIndex = 0;
+		UE_LOG(LogTemplateCharacter, Warning, TEXT("Inventory Index: %d"), InventoryListIndex);
+	}
 }
 
-bool ASeekerOfSpellsCharacter::GetHasRifle()
+void ASeekerOfSpellsCharacter::CycleInventoryBackwards()
 {
-	return bHasRifle;
+	if (Controller != nullptr)
+	{
+		if (InventoryListIndex >= 1) InventoryListIndex--;
+		else InventoryListIndex = MaxInventory;
+		UE_LOG(LogTemplateCharacter, Warning, TEXT("Inventory Index: %d"), InventoryListIndex);
+	}
+}
+
+int ASeekerOfSpellsCharacter::GetInventoryIndex()
+{
+	return InventoryListIndex;
+}
+
+FString ASeekerOfSpellsCharacter::GetInventoryItemNameAtIndex(int x)
+{
+	return InventoryList[x];
+}
+
+int ASeekerOfSpellsCharacter::MatchInventoryItemWithSpell(FString x)
+{
+	int Index = 0;
+
+	for (int i = 0; i < AllItemsList.Num(); i++)
+	{
+		if (x == AllItemsList[i]) 
+		{
+			Index = i + 1;
+			break;
+		}
+	}
+
+	return Index;
+}
+
+FString ASeekerOfSpellsCharacter::PlaceItemInInventory(FString ItemName)
+{
+	if (InventoryList[InventoryListIndex] == "Empty")
+	{
+		InventoryList[InventoryListIndex] = ItemName;
+		return FString("Empty");
+	}
+	else
+	{
+		FString Temp = InventoryList[InventoryListIndex];
+		InventoryList[InventoryListIndex] = ItemName;
+		return Temp;
+	}
+}
+
+TArray<FString> ASeekerOfSpellsCharacter::GetAllItemsList()
+{
+	return AllItemsList;
 }

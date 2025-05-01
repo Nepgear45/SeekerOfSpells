@@ -13,6 +13,20 @@ class ASeekerOfSpellsGameMode : public AGameModeBase
 
 public:
 	ASeekerOfSpellsGameMode();
+
+private:
+	UPROPERTY()
+	TArray<AActor*> EnemyList;
+
+public:
+	UFUNCTION(BlueprintCallable, Category = "GameModeHanlder")
+	TArray<AActor*> GetEnemyList();
+	UFUNCTION(BlueprintCallable, Category = "GameModeHanlder")
+	void AddToEnemyList(AActor* Enemy);
+
+	UFUNCTION(BlueprintCallable, Category = "GameModeHanlder")
+	AActor* GetEnemyAtIndex(int x);
+
 };
 
 

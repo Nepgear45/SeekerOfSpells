@@ -2,6 +2,9 @@ Binaries
 DerivedDataCache
 Intermediate
 Saved
+Content/MixedVFX
+Content/StarterContent
+Content/SwordTrailVFX
 .vscode
 .vs
 *.VC.db

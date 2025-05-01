@@ -12,3 +12,18 @@ ASeekerOfSpellsGameMode::ASeekerOfSpellsGameMode()
 	DefaultPawnClass = PlayerPawnClassFinder.Class;
 
 }
+
+TArray<AActor*> ASeekerOfSpellsGameMode::GetEnemyList()
+{
+	return EnemyList;
+}
+
+void ASeekerOfSpellsGameMode::AddToEnemyList(AActor* Enemy)
+{
+	EnemyList.Add(Enemy);
+}
+
+AActor* ASeekerOfSpellsGameMode::GetEnemyAtIndex(int x)
+{
+	return EnemyList[x];
+}
