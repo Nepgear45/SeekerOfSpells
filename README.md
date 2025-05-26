@@ -1,11 +1,33 @@
+--- Requirements -----------------------------------------------
 
 --- Controls ---------------------------------------------------
 
+Movement: W, A, S, D
+Jump: Space Bar
+Dash: Shift
+Use Item in slot: Left Mouse Button
+Change Item in inventory: C for left, V for right
+Pick up Item: E
+Drop Item in selected inventor slot: G
+Pause Game: P
 
+--- Spell Tier -------------------------------------------------
+
+- Basic Spell = 1 secound cooldown
+BasicAttack
+LightBall
+StoneCannon
+
+- Medium Spell = 2.5 secound cooldown
+FireBall
+
+- Powerfull Spell = 10 secound cooldown
+Dispel
+Barrier
 
 --- Patch notes ------------------------------------------------
---- V0.09 ---
 
+--- V0.09 ---
 - Added HUD
 - Added Health and Mana bars
 	Both bars adjust to the max amount they have dynamically and can be changed in game
@@ -13,26 +35,22 @@
 	Needs to be applied to all slots, so far works flawlessly with first (might need to check for reference compatibility)
 
 --- V0.10 ---
-
 - Added primitve AI for testing
 - Added AI animations
 
 --- V0.11 ---
-
 - Added AI Behavioral tree
 - Added AI that chances the player and can lose sight of the player
 - Fixed an issue with AI Forever following the player
 - Fixed an issue where AI would snap into postion if the angle of turning would be too great
 
 --- V0.12 ---
-
 - Added EnemyDamage
 - Added EnemyAttack Animations
 - Fixed a lot of bugs with enemy animations (dont ask)
 - Added Immunity frames to Player
 
 --- V0.13 ---
-
 - Reworked Animation handling
 - Fixed all bugs with animation looping
 - Fixed error upon quitting the game where weapon would not be found by Blueprints
@@ -42,7 +60,6 @@ Known issues:
 - Enemy AI still moves while attacking but the animation indicates they are standing still, this is not an animation bug it is simply a fault in AI Programming (so me my fault)
 
 --- V0.14 ---
-
 - Fixed a bug where AI player detection would collide with projectiles
 - Fixed a bug where AI would lose the player if the player looped around the AI before it fully turned around
 - Fixed a bug where AI would regain SeePlayer status immidiately after losing sight of player making it infinitely follow the player
@@ -50,7 +67,6 @@ Known issues:
 - All projectiles now use native collision projectile object type
 
 --- V0.15 ---
-
 - Fixed a bug where sword would only hit player arms not their hitbox
 - Fixed sliding bug during attack animation
 - Reworked Enemy to inherit from a c++ class for easier damage casting
@@ -64,11 +80,9 @@ Known bugs:
 - The sword from EnemyChaseAI does not have physics after detaching from it
 
 --- V0.16 ---
-
 - Added bases for EnemyCaster and their AI
 
 --- V0.17 ---
-
 - Fixed AI not stoppint when needed
 - Changed some hardcoded values to be more accessible in blueprint
 - Fixed EnemyCaster collisions
@@ -89,7 +103,6 @@ Known issues
 - Tags do not get properly applied in C++ and have to be manually applied in Blueprints (No fix sofar)
 
 --- V0.18 ---
-
 - Added Pause menu
 - Added Breakable walls (Explosion)
 - Added Spikes
@@ -152,6 +165,104 @@ There is no obvious error as the project is stuck loading whitout freezing or sh
 - Added display options: Window mode, Display Resolution, Framerate
 - Added graphical options: View Distance, Post Processing, Anti Aliasing, Texture Quality, Shadow Quality
 
+--- V0.24 ---
+- Switched Anti aliasing to TSR mode for better image quality
+- Improved lighting effects
+- Reworked spawn area
+- Added dynamic mesh mapping
+- Added closable door
+- Fixed BP_EnemyChase corruption caused by unreal crash
+- Added RoomEventHanlder
+- Added area detection for rooms
+
+--- V0.24.1 ---
+- Added functional Triggers to rooms
+- Added conditional door opening and closing
+- Added Enemy death in room detection
+
+Known issues:
+AI character mesh extends outside the capsule hitbox preventing successful hits during animation under certain angles
+
+--- V0.25 ---
+- Added main menu panorama scene
+- Impoved door fetching and interactions system
+- Added Gate (another door)
+- Improved navmesh connection between AI when spawning from elevation
+
+--- V0.25.1 ---
+- Rotation on objects based on event tick is tied to FPS (Timers will be more effective than event tick)
+- Added Key locked door
+- Added Key item
+- Added support for multiple Key items
+- Added Key item indicator in hud
+- Added Indicator for items in range
+- Fixed Indicator not being accurate when many items are in range
+- Improved performance for lighting effects with multiple sources of light in one place
+
+--- V0.25.5 ---
+- Added LightBall spell
+- Added dimming effect to LightBall
+- Added LightBall spell pickup
+- Added LightBall spell icon to HUD
+- Fixed Projectiles ignoring static meshes in certain scenarios
+- Reworked the way assets are rendered and grouped
+- Decreased amount of detail in some meshes for optimization
+- Added Sound settings
+- Added Master, BGM, SFX, UI Volumes and their respective sldiers
+- Added custom variable Saving
+- Added creation of default settings if no user settings are found
+- Added Background music to MainMenu
+
+Notes:
+SFX and UI sounds are not in use due to lack of sounds (Still being applied and saved)
+
+--- V0.25.6 ---
+- Fixed an issue where background music would freeze during detection of optimal settings
+- Added new model for enemies
+- Added Sound attenuation
+- Added Stepping sounds
+- Added Sword hit and swoosh sounds
+- Added Sound Cue
+- Added random footstep noise on movement animations
+- Added Dynamic footsteps and footstep mapping
+- Fixed a bug where torches would ignore SFX setting
+- Fixed corruption problems with Game mode being overriden by C++ class
+
+Known Bugs:
+Overriding game mode with a c++ class will corrput it and will brick the project
+
+--- V0.25.7 ---
+- Fixed a bug where sword hit sound would play when character overlapped with the sword even if the AI character was dead
+- Fix Torch sounds ignoring master volume
+- Explosion can now trigger fake floor
+- Casting sound effect no longer plays when the spell isnt cast due to lack of mana
+- Adjusted room alignment
+- Reworked BasicAttackSpell visuals and hitboxes
+- Added projectile flying sound to BasicAttackSpell
+- Adjusted sound attenuation for all spells and their after effects
+- Added Delay timer indicator in HUD
+- Added 3 types of spell tags (refer to README in section Spell tier)
+- Fixed collision bug with IronDoorKey item
+- Fixed collision with FireBalls and turret casting it
+
+Notes:
+- Timers are mismatched by milisecounds (not noticable without debug)
+- HUD time effect is slight off the items
+
+--- V0.25.8 RETRACTED---
+THIS PATCH HAS BEEN RETRACTED DUE TO POOR CODE QUALITY AND BUGS RESULTING FROM OMITTED CODE
+RETRACTION HAPPENED BEFORE COMMIT WAS PUSHED TO GITHUB
+
+--- V0.25.9 ---
+- BGM now pauses when muted instead of dissapearing in main menu
+- Reworked the way default values are saved in FirstPersonCharacter
+- Added saving for all game objects
+- Fixed RoomEvents dont keep cleared status after secound save
+- Fixed 13 saving inconsistency issues
+
+Notes:
+The patch V0.25.8 is missing as it has been retracted due to poor code quality
+
 #######################################################################################################################
 
 --- Currently known bugs in UE5.3.2 ---
@@ -161,6 +272,7 @@ There is no obvious error as the project is stuck loading whitout freezing or sh
 - Tags do not get properly applied in C++ and have to be manually applied in Blueprints (No fix sofar)
 - Casting certain values directly to C++ class of game mode base can cause unreal to not package and never load upon reloading the project.
 There is no obvious error as the project is stuck loading whitout freezing or showing signs of malfuntioning.
+- Overriding game mode with a c++ class will corrput it and will brick the project
 
 --- Engine notes ---
 UE5.3.2 had some features missing/not enabled and it had to be edited manually in source code. 
