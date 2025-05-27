@@ -263,6 +263,29 @@ RETRACTION HAPPENED BEFORE COMMIT WAS PUSHED TO GITHUB
 Notes:
 The patch V0.25.8 is missing as it has been retracted due to poor code quality
 
+UNIT TEST RESULTS | Patch V0.25.9
+Saving test:
+- Ground items consistency during reloads PASSED
+- Ground items consistency when overwriting save files PASSED
+- Iron door key consistency during reloads FAILED (Spawning problem when game loaded from save)
+- Iron door key consistency when overwriting save files OMITTED (Previous test failed)
+- Threat detection during saving PASSED
+- Room status consistency during reloads PASSED
+- Room status consistency when overwriting save files PASSED
+- Stand alone door consistency during reloads PASSED
+- Stand alone door consistency when overwriting save files FAILED (Door doesnt keep status over multiple saves)
+- Player Statistics consistency during reloads PASSED
+- Player Statistics consistency when overwriting save files PASSED
+- Player States consistency during reloads PASSED
+- Player States consistency when overwriting save files PASSED
+
+Data test:
+- Data loading during different states PASSED
+- Data loading after restart of the game PASSED
+- Lossless position saving PASSED
+- Consistency when loading PASSED
+- Overwriting and loading the same file to check for read/write errors PASSED
+
 #######################################################################################################################
 
 --- Currently known bugs in UE5.3.2 ---
