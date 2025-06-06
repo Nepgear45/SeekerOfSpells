@@ -1,5 +1,17 @@
 --- Requirements -----------------------------------------------
 
+Minimum Requirements (1080p 30FPS):
+CPU: i7 3770 or equivalent
+GPU: GTX 960 2GB or equivalent
+RAM: 8GB DDR3
+Storage: 3GB hard drive
+
+Recommended Requirements (1080p 60FPS):
+CPU: i5 10400f or equivalent
+GPU: RTX 3060 6GB or equivalent (8GB VRAM for ultra settings)
+RAM: 12GB DDR4
+Storage: 3GB hard drive
+
 --- Controls ---------------------------------------------------
 
 Movement: W, A, S, D
@@ -350,6 +362,31 @@ Data test:
 - Added Borderless window option in settings menu
 - Changed the name of BGM Volume to Background Musci Volume in settings
 - Updated Pause settings menu accordingly
+
+--- V0.27.0 ---
+- Added sprites for UI buttons
+- Adjusted Basic attack magic balancing
+- Adjusted Explosion radius and duration from Fireball spell
+- Fixed fireball turret immunity to dispell magic
+- Adjusted the location of disable particles on turrets
+- Added UI sounds
+- Removed some fake floors for optimization
+- Fixed a bug where unbreakable wall had no collision for player
+- Added new area and secrets to the map
+- Added another room event in the new area
+- Added Game finish sequence
+
+--- V0.27.1 ---
+- Fixed Big room cliping with starting split
+- Added HUD off option for cinematic screenshots
+- Added Keybind menu
+
+--- V0.27.2 ---
+- Fixed explosion radius staying too long
+- Renamed Keybing settings to keybinds
+- Added crosshair to HUD
+- Added crosshair toggle
+- Fixed RoomEvents not spawning under certain circumstances when loading
 
 #######################################################################################################################
 
